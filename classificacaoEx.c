@@ -73,12 +73,11 @@ void readSequence(FILE *in){
         for(int i=0 ; i<aux; i++){
             printf("%d ", num[i]);
         }
-        /*printf("\n\tSequencia ordenada: ");
+        printf("\n\tSequencia ordenada: ");
         qsort(num, (int)aux, sizeof(int), compare);
         for(int i=0 ; i<aux; i++){
             printf("%d ", num[i]);
         }
-        */
         printf("\n\n");
         makeOrderedArchive(num, (int)aux);
         
