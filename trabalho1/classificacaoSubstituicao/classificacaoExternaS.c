@@ -16,6 +16,7 @@ int menorPosicaoValorDescongelado(Memoria **M);
 int quantidadeMemoriaCongeladas(Memoria **M);
 void descongelaMemoria(Memoria **M);
 void classificacaoExternaPorSubstituicao(FILE *in);
+void casoEspecial(Memoria **M, int particao);
 
 int main() {
     gerarArquivoDesordenadoClientes();
@@ -84,6 +85,34 @@ int quantidadeMemoriaCongeladas(Memoria **M){
     return count;
 }
 
+void casoEspecial(Memoria **M, int particao){
+Memoria **CopiaM = (Memoria**)malloc(sizeof(Memoria*) * TAMANHO_MEMORIA);
+    for (int i = 0; i < TAMANHO_MEMORIA; i++) {
+        CopiaM[i] = (Memoria*)malloc(sizeof(Memoria));
+        // Copiar os valores de M[i] para CopiaM[i]
+        CopiaM[i]->Cliente = (Cliente*)malloc(sizeof(Cliente));
+        CopiaM[i]->Cliente->CodigoCliente = M[i]->Cliente->CodigoCliente;
+        CopiaM[i]->Congelado = !M[i]->Congelado;
+    }
+
+    int posicao;
+    printf("(Particao especial: ");
+    while (quantidadeMemoriaCongeladas(CopiaM) != TAMANHO_MEMORIA)
+    {
+        posicao=menorPosicaoValorDescongelado(CopiaM);
+        CopiaM[posicao]->Congelado = true;
+        printf("%d\t", CopiaM[posicao]->Cliente->CodigoCliente);
+    }
+    printf(")");    
+
+    for (int i = 0; i < TAMANHO_MEMORIA; i++) {
+        free(CopiaM[i]->Cliente);
+        free(CopiaM[i]);
+    }
+    free(CopiaM);
+}
+
+
 
 void classificacaoExternaPorSubstituicao(FILE *in){
     Memoria **M = inicializaMemoria(in);
@@ -110,10 +139,12 @@ void classificacaoExternaPorSubstituicao(FILE *in){
             }
             M[posicao]->Cliente->CodigoCliente = novoCliente.CodigoCliente;
         }else{
+            casoEspecial(M, particao);
             M[posicao]->Congelado = true;
             arquivoAcabou = true;
         }
     }
+
     while (quantidadeMemoriaCongeladas(M) != TAMANHO_MEMORIA)
     {
         posicao=menorPosicaoValorDescongelado(M);
