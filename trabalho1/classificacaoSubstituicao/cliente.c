@@ -59,8 +59,8 @@ void gerarArquivoDesordenadoClientes() {
         {60, "Zara Pinto", "20/02/1984"},
         {36, "Arthur Ferreira", "21/03/1987"},
         {47, "Beatriz Moraes", "22/04/1985"},
-        {31, "César Barros", "23/05/1982"},
-        {80, "Débora Batista", "24/06/1983"}
+        {0, "César Barros", "23/05/1982"},
+        {2, "Débora Batista", "24/06/1983"}
     };
 
     FILE *out = fopen("arquivoClientesDesordenados.dat", "wb+");
