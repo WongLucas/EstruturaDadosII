@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TAMANHO_ARQ 6
+#define TAMANHO_ARQ 7
 
 typedef struct Cliente {
     int CodigoCliente;

@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define QUANTIDADE_CLIENTES 54
 
 void gerarArquivoDesordenadoClientes() {
-    Cliente clientes[QUANTIDADE_CLIENTES] = {
+    Cliente clientes[] = {
         {29, "Alice Silva", "01/01/1990"},
         {14, "Bruno Souza", "02/02/1985"},
         {76, "Carlos Pereira", "03/03/1978"},
@@ -69,8 +68,9 @@ void gerarArquivoDesordenadoClientes() {
         printf("Erro ao gerar arquivo de clientes desordenados");
         return;
     }
+    size_t numClientes = sizeof(clientes) / sizeof(clientes[0]);
 
-    fwrite(clientes, sizeof(Cliente), QUANTIDADE_CLIENTES, out);
+    fwrite(clientes, sizeof(Cliente), numClientes, out);
 
     fclose(out);
 }
