@@ -5,7 +5,7 @@
 #include <limits.h>
 #include <string.h>
 
-#define TAMANHO_MEMORIA 6
+#define TAMANHO_MEMORIA 5
 
 typedef struct {
     Cliente *Cliente;
